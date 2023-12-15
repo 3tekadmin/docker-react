@@ -10,3 +10,16 @@ before_install:
 script:
   - echo "Running scripts like tests"
   - docker run -e CI=true devopsgru/docker-react npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-west-1
+  app: "docker"
+  env: "Docker-env"
+  bucket_name: "elastics"
+  bucket_path: "docker"
+  on:
+    branch: master
+
+access_key_id: $testme
+secret_access_key: $testme
