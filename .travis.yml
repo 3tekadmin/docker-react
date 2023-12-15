@@ -1,0 +1,12 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - echo "Performing pre-install steps like building the Docker image"
+  - docker build -t devopsgru/docker-react -f dockerfile.dev .
+
+script:
+  - echo "Running scripts like tests"
+  - docker run -e CI=true devopsgru/docker-react npm run test -- --coverage
